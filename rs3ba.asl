@@ -28,9 +28,9 @@ update
 	current.y = (int)(current.y / 0x200) - 5251;
 	
 	// Skip if position is unchanged
-	if (current.x == old.x && current.y == old.y) {
-		return false;
-	}
+	//if (current.x == old.x && current.y == old.y) {
+	//	return false;
+	//}
 	
 	// Check if in BA basement
 	current.basement = (current.x >= 0 && current.x <= 41 && current.y >= 0 && current.y <= 57) ? true : false;
@@ -77,8 +77,8 @@ update
 
 start
 {
-	// Enter wave 1
-	if (old.room == 1 && !current.basement) {
+	// Enter wave
+	if (old.room == current.wave && !current.basement) {
 		return true;
 	}
 }
@@ -99,7 +99,7 @@ split
 reset
 {
 	// Enter wave 1 room or leave basement
-	if ((old.room == 0 && current.room == 1) || (old.basement && !current.basement)) {
+	if ((old.room == 0 && current.room == 1) || (old.room == 0 && old.basement && !current.basement)) {
 		return true;
 	}
 }
