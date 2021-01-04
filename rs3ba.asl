@@ -11,8 +11,6 @@ init
 {
 	vars.wave = 0;
 	vars.basement = false;
-	vars.row = 0;
-	vars.col = 0;
 	vars.room = 0;
 	vars.completed = false;
 }
@@ -42,29 +40,31 @@ update
 		current.room = 0;
 	}
 	else {
+		int row;
+		int col;
 		if (current.y >= 44 && current.y <= 57) {
 			// Rooms 1-4
-			current.row = 0;
-			current.col = (current.x - 1) / 10 + 1;
+			row = 0;
+			col = (current.x - 1) / 10 + 1;
 		}
 		else if (current.y >= 28 && current.y <= 41 && current.x != 20 && current.x != 21) {
 			// Rooms 5-8
-			current.row = 1;
-			current.col = current.x <= 19 ? current.x / 10 + 1 : (current.x - 2) / 10 + 1;
+			row = 1;
+			col = current.x <= 19 ? current.x / 10 + 1 : (current.x - 2) / 10 + 1;
 		}
 		else if (current.y >= 12 && current.y <= 25 && current.x <= 19) {
 			// Rooms 9-10
-			current.row = 2;
-			current.col = current.x / 10 + 1;
+			row = 2;
+			col = current.x / 10 + 1;
 		}
 		else {
 			// Corridors
-			current.row = 0;
-			current.col = 0;
+			row = 0;
+			col = 0;
 		}
 		
 		// Room number
-		current.room = 4 * current.row + current.col;
+		current.room = 4 * row + col;
 	}
 	
 	
@@ -80,6 +80,7 @@ start
 {
 	// Enter wave
 	if (old.room == current.wave && !current.basement) {
+		vars.completed = false;
 		return true;
 	}
 }
@@ -103,6 +104,7 @@ reset
 {
 	// Enter wave 1 room or leave basement
 	if ((old.room == 0 && current.room == 1) || (old.room == 0 && old.basement && !current.basement)) {
+		vars.completed = false;
 		return true;
 	}
 }
