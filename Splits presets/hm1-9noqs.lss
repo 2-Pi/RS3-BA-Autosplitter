@@ -2,7 +2,7 @@
 <Run version="1.7.0">
   <GameIcon />
   <GameName>Runescape 3</GameName>
-  <CategoryName>HM BA 1-9</CategoryName>
+  <CategoryName>Barbarian Assault HM 1-9</CategoryName>
   <Metadata>
     <Run id="" />
     <Platform usesEmulator="False">
@@ -33,19 +33,11 @@
     <Attempt id="9" started="01/03/2021 16:30:29" isStartedSynced="True" ended="01/03/2021 16:41:23" isEndedSynced="True">
       <RealTime>00:10:54.0610000</RealTime>
     </Attempt>
+    <Attempt id="10" started="01/03/2021 20:56:21" isStartedSynced="True" ended="01/03/2021 20:57:36" isEndedSynced="True" />
   </AttemptHistory>
   <Segments>
     <Segment>
       <Name>Wave 1</Name>
-      <Icon />
-      <SplitTimes>
-        <SplitTime name="Personal Best" />
-      </SplitTimes>
-      <BestSegmentTime />
-      <SegmentHistory />
-    </Segment>
-    <Segment>
-      <Name>Qs 1</Name>
       <Icon />
       <SplitTimes>
         <SplitTime name="Personal Best" />
@@ -63,25 +55,7 @@
       <SegmentHistory />
     </Segment>
     <Segment>
-      <Name>Qs 2</Name>
-      <Icon />
-      <SplitTimes>
-        <SplitTime name="Personal Best" />
-      </SplitTimes>
-      <BestSegmentTime />
-      <SegmentHistory />
-    </Segment>
-    <Segment>
       <Name>Wave 3</Name>
-      <Icon />
-      <SplitTimes>
-        <SplitTime name="Personal Best" />
-      </SplitTimes>
-      <BestSegmentTime />
-      <SegmentHistory />
-    </Segment>
-    <Segment>
-      <Name>Qs 3</Name>
       <Icon />
       <SplitTimes>
         <SplitTime name="Personal Best" />
@@ -99,25 +73,7 @@
       <SegmentHistory />
     </Segment>
     <Segment>
-      <Name>Qs 4</Name>
-      <Icon />
-      <SplitTimes>
-        <SplitTime name="Personal Best" />
-      </SplitTimes>
-      <BestSegmentTime />
-      <SegmentHistory />
-    </Segment>
-    <Segment>
       <Name>Wave 5</Name>
-      <Icon />
-      <SplitTimes>
-        <SplitTime name="Personal Best" />
-      </SplitTimes>
-      <BestSegmentTime />
-      <SegmentHistory />
-    </Segment>
-    <Segment>
-      <Name>Qs 5</Name>
       <Icon />
       <SplitTimes>
         <SplitTime name="Personal Best" />
@@ -135,15 +91,6 @@
       <SegmentHistory />
     </Segment>
     <Segment>
-      <Name>Qs 6</Name>
-      <Icon />
-      <SplitTimes>
-        <SplitTime name="Personal Best" />
-      </SplitTimes>
-      <BestSegmentTime />
-      <SegmentHistory />
-    </Segment>
-    <Segment>
       <Name>Wave 7</Name>
       <Icon />
       <SplitTimes>
@@ -153,25 +100,7 @@
       <SegmentHistory />
     </Segment>
     <Segment>
-      <Name>Qs 7</Name>
-      <Icon />
-      <SplitTimes>
-        <SplitTime name="Personal Best" />
-      </SplitTimes>
-      <BestSegmentTime />
-      <SegmentHistory />
-    </Segment>
-    <Segment>
       <Name>Wave 8</Name>
-      <Icon />
-      <SplitTimes>
-        <SplitTime name="Personal Best" />
-      </SplitTimes>
-      <BestSegmentTime />
-      <SegmentHistory />
-    </Segment>
-    <Segment>
-      <Name>Qs 8</Name>
       <Icon />
       <SplitTimes>
         <SplitTime name="Personal Best" />

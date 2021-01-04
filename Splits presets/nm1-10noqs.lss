@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Run version="1.7.0">
+  <GameIcon />
+  <GameName>Runescape 3</GameName>
+  <CategoryName>Barbarian Assault NM 1-10</CategoryName>
+  <Metadata>
+    <Run id="" />
+    <Platform usesEmulator="False">
+    </Platform>
+    <Region>
+    </Region>
+    <Variables />
+  </Metadata>
+  <Offset>00:00:00</Offset>
+  <AttemptCount>0</AttemptCount>
+  <AttemptHistory>
+    <Attempt id="1" started="09/28/2020 15:25:51" isStartedSynced="True" ended="09/28/2020 15:37:21" isEndedSynced="True">
+      <RealTime>00:11:29.5870000</RealTime>
+    </Attempt>
+    <Attempt id="2" started="09/29/2020 12:15:54" isStartedSynced="True" ended="09/29/2020 12:15:57" isEndedSynced="True" />
+    <Attempt id="3" started="09/29/2020 12:16:03" isStartedSynced="True" ended="09/29/2020 12:26:37" isEndedSynced="True">
+      <RealTime>00:10:33.7910000</RealTime>
+    </Attempt>
+    <Attempt id="4" started="09/29/2020 12:41:32" isStartedSynced="True" ended="09/29/2020 12:42:21" isEndedSynced="True" />
+    <Attempt id="5" started="09/30/2020 23:13:03" isStartedSynced="True" ended="09/30/2020 23:25:22" isEndedSynced="True">
+      <RealTime>00:12:19.9420000</RealTime>
+    </Attempt>
+    <Attempt id="6" started="11/16/2020 20:09:06" isStartedSynced="False" ended="11/16/2020 20:10:08" isEndedSynced="True" />
+    <Attempt id="7" started="11/16/2020 20:10:35" isStartedSynced="True" ended="11/16/2020 20:22:01" isEndedSynced="True">
+      <RealTime>00:11:25.2790000</RealTime>
+    </Attempt>
+    <Attempt id="8" started="01/03/2021 16:19:48" isStartedSynced="True" ended="01/03/2021 16:19:50" isEndedSynced="True" />
+    <Attempt id="9" started="01/03/2021 16:30:29" isStartedSynced="True" ended="01/03/2021 16:41:23" isEndedSynced="True">
+      <RealTime>00:10:54.0610000</RealTime>
+    </Attempt>
+    <Attempt id="10" started="01/03/2021 20:56:21" isStartedSynced="True" ended="01/03/2021 20:57:36" isEndedSynced="True" />
+  </AttemptHistory>
+  <Segments>
+    <Segment>
+      <Name>Wave 1</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Wave 2</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Wave 3</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Wave 4</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Wave 5</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Wave 6</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Wave 7</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Wave 8</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Wave 9</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Wave 10</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+  </Segments>
+  <AutoSplitterSettings />
+</Run>
