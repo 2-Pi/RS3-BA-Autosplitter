@@ -14,6 +14,7 @@ init
 	vars.wave_progress = 0;
 	vars.in_basement = false;
 	vars.room = 0;
+	refreshRate = 30;
 	
 }
 
@@ -27,15 +28,10 @@ update
 {
 	// Wave progress
 	current.wave_progress = current.hardmode ? (int)current.hmwave / 0x8 : ((int)current.nmwave - 0x2000) / 0x80;
-	
+
 	// Position relative to SW tile of BA basement
 	current.x = (int)(current.x / 0x200) - 2573;
 	current.y = (int)(current.y / 0x200) - 5251;
-	
-	// Skip if position is unchanged
-	if (current.x == old.x && current.y == old.y && current.wave_progress == old.wave_progress) {
-		return false;
-	}
 	
 	// Check if in BA basement
 	current.in_basement = current.x >= 0 && current.x <= 41 && current.y >= 0 && current.y <= 57;
