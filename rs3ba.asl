@@ -15,6 +15,12 @@ init
 	vars.completed = false;
 }
 
+startup
+{
+	settings.Add("qs", true, "Split quickstarts");
+	settings.SetToolTip("qs", "Split downtime between waves separately.");
+}
+
 update
 {
 	// Wave progress
@@ -67,7 +73,7 @@ update
 		current.room = 4 * row + col;
 	}
 	
-	
+	// Debug info
 	print("x: " + current.x.ToString() +
 		"\ny: " + current.y.ToString() +
 		"\nHard Mode: " + current.hmtoggle.ToString() + 
@@ -94,7 +100,7 @@ split
 	}
 	
 	// Enter wave after previous one is completed
-	if (old.room == current.wave && !current.basement && vars.completed) {
+	if (settings["qs"] && old.room == current.wave && !current.basement && vars.completed) {
 		vars.completed = false;
 		return true;
 	}
