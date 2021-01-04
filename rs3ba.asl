@@ -1,6 +1,6 @@
 state("rs2client")
 {
-	bool hmtoggle : 0x691868, 0x18, 0x38, 0x28, 0xA98, 0x50, 0x30;
+	bool hardmode : 0x691868, 0x18, 0x38, 0x28, 0xA98, 0x50, 0x30;
 	ushort nmwave : 0x691868, 0x18, 0x38, 0x28, 0x2E80, 0x32;
 	byte hmwave : 0x691868, 0x18, 0x38, 0x28, 0xA90, 0x50, 0x30;
 	float x : 0x691868, 0x60, 0xBB0, 0x2C;
@@ -18,15 +18,13 @@ init
 startup
 {
 	settings.Add("qs", true, "Split quickstarts");
-	settings.SetToolTip("qs", "Split downtime between waves separately.");
+	settings.SetToolTip("qs", "Split downtime/quickstarts between waves separately.");
 }
 
 update
 {
 	// Wave progress
-	current.nmwave = ((int)current.nmwave - 0x2000) / 0x80;
-	current.hmwave = (int)current.hmwave / 0x8;
-	current.wave = current.hmtoggle ? current.hmwave : current.nmwave;
+	current.wave = current.hardmode ? (int)current.hmwave / 0x8 : ((int)current.nmwave - 0x2000) / 0x80;
 	
 	// Position relative to SW tile of BA basement
 	current.x = (int)(current.x / 0x200) - 2573;
@@ -38,7 +36,7 @@ update
 	}
 	
 	// Check if in BA basement
-	current.basement = (current.x >= 0 && current.x <= 41 && current.y >= 0 && current.y <= 57) ? true : false;
+	current.basement = current.x >= 0 && current.x <= 41 && current.y >= 0 && current.y <= 57;
 	
 	// Determine room number
 	if (!current.basement) {
@@ -69,14 +67,13 @@ update
 			col = 0;
 		}
 		
-		// Room number
 		current.room = 4 * row + col;
 	}
 	
 	// Debug info
 	print("x: " + current.x.ToString() +
 		"\ny: " + current.y.ToString() +
-		"\nHard Mode: " + current.hmtoggle.ToString() + 
+		"\nHard Mode: " + current.hardmode.ToString() + 
 		"\nWave: " + current.wave.ToString() + 
 		"\nBasement: " + current.basement.ToString() + 
 		"\nRoom: " + current.room.ToString());
