@@ -33,7 +33,7 @@ update
 	current.y = (int)(current.y / 0x200) - 5251;
 	
 	// Skip if position is unchanged
-	if (current.x == old.x && current.y == old.y) {
+	if (current.x == old.x && current.y == old.y && current.wave_progress == old.wave_progress) {
 		return false;
 	}
 	
@@ -94,7 +94,7 @@ start
 split
 {
 	// Complete wave
-	if (current.wave_progress == old.wave_progress + 1) || (current.wave_progress == 1 && old.wave_progress == 10)) {
+	if ((current.wave_progress == old.wave_progress + 1) || (current.wave_progress == 1 && old.wave_progress == 10)) {
 		vars.wave_completed = true;
 		vars.first_wave = false;
 		return true;
