@@ -9,10 +9,12 @@ state("rs2client")
 
 init
 {
-	vars.wave = 0;
-	vars.basement = false;
+	vars.first_wave = false;
+	vars.wave_completed = false;
+	vars.wave_progress = 0;
+	vars.in_basement = false;
 	vars.room = 0;
-	vars.completed = false;
+	
 }
 
 startup
@@ -24,22 +26,22 @@ startup
 update
 {
 	// Wave progress
-	current.wave = current.hardmode ? (int)current.hmwave / 0x8 : ((int)current.nmwave - 0x2000) / 0x80;
+	current.wave_progress = current.hardmode ? (int)current.hmwave / 0x8 : ((int)current.nmwave - 0x2000) / 0x80;
 	
 	// Position relative to SW tile of BA basement
 	current.x = (int)(current.x / 0x200) - 2573;
 	current.y = (int)(current.y / 0x200) - 5251;
 	
-	// Skip if position and wave progress are unchanged
-	if (current.x == old.x && current.y == old.y && current.wave == old.wave) {
+	// Skip if position is unchanged
+	if (current.x == old.x && current.y == old.y) {
 		return false;
 	}
 	
 	// Check if in BA basement
-	current.basement = current.x >= 0 && current.x <= 41 && current.y >= 0 && current.y <= 57;
+	current.in_basement = current.x >= 0 && current.x <= 41 && current.y >= 0 && current.y <= 57;
 	
 	// Determine room number
-	if (!current.basement) {
+	if (!current.in_basement) {
 		// Outside basement
 		current.room = 0;
 	}
@@ -66,7 +68,7 @@ update
 			row = 0;
 			col = 0;
 		}
-		
+
 		current.room = 4 * row + col;
 	}
 	
@@ -74,16 +76,17 @@ update
 	print("x: " + current.x.ToString() +
 		"\ny: " + current.y.ToString() +
 		"\nHard Mode: " + current.hardmode.ToString() + 
-		"\nWave: " + current.wave.ToString() + 
-		"\nBasement: " + current.basement.ToString() + 
+		"\nWave: " + current.wave_progress.ToString() + 
+		"\nBasement: " + current.in_basement.ToString() + 
 		"\nRoom: " + current.room.ToString());
 }
 
 start
 {
 	// Enter wave
-	if (old.room == current.wave && !current.basement) {
-		vars.completed = false;
+	if (old.room == current.wave_progress && !current.in_basement) {
+		vars.wave_completed = false;
+		vars.first_wave = true;
 		return true;
 	}
 }
@@ -91,23 +94,36 @@ start
 split
 {
 	// Complete wave
-	if (current.wave == old.wave + 1 || (current.wave == 1 && old.wave == 10)) {
-		vars.completed = true;
+	if (current.wave_progress == old.wave_progress + 1) || (current.wave_progress == 1 && old.wave_progress == 10)) {
+		vars.wave_completed = true;
+		vars.first_wave = false;
 		return true;
 	}
 	
 	// Enter wave after previous one is completed
-	if (settings["qs"] && old.room == current.wave && !current.basement && vars.completed) {
-		vars.completed = false;
+	if (settings["qs"] && old.room == current.wave_progress && !current.in_basement && vars.wave_completed) {
+		vars.wave_completed = false;
 		return true;
 	}
 }
 
 reset
 {
-	// Enter wave 1 room or leave basement
-	if ((old.room == 0 && current.room == 1) || (old.room == 0 && old.basement && !current.basement)) {
-		vars.completed = false;
+	// Reset to lower wave
+	if (current.wave_progress < old.wave_progress && current.in_basement) {
+		vars.wave_completed = false;
+		return true;
+	}
+
+	// Fail first wave
+	if (old.room == 0 && current.room != 0 && vars.first_wave) {
+		vars.first_wave = false;
+		return true;
+	}
+
+	// Leave basement
+	if (old.room == 0 && old.in_basement && !current.in_basement) {
+		vars.wave_completed = false;
 		return true;
 	}
 }
