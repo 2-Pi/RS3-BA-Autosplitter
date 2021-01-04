@@ -27,10 +27,10 @@ update
 	current.x = (int)(current.x / 0x200) - 2573;
 	current.y = (int)(current.y / 0x200) - 5251;
 	
-	// Skip if position is unchanged
-	//if (current.x == old.x && current.y == old.y) {
-	//	return false;
-	//}
+	// Skip if position and wave progress are unchanged
+	if (current.x == old.x && current.y == old.y && current.wave == old.wave) {
+		return false;
+	}
 	
 	// Check if in BA basement
 	current.basement = (current.x >= 0 && current.x <= 41 && current.y >= 0 && current.y <= 57) ? true : false;
@@ -49,7 +49,7 @@ update
 		else if (current.y >= 28 && current.y <= 41 && current.x != 20 && current.x != 21) {
 			// Rooms 5-8
 			current.row = 1;
-			current.col = current.x <= 19 ? current.x / 10 + 1: (current.x - 2) / 10 + 1;
+			current.col = current.x <= 19 ? current.x / 10 + 1 : (current.x - 2) / 10 + 1;
 		}
 		else if (current.y >= 12 && current.y <= 25 && current.x <= 19) {
 			// Rooms 9-10
