@@ -14,6 +14,7 @@ init
 	vars.row = 0;
 	vars.col = 0;
 	vars.room = 0;
+	vars.completed = false;
 }
 
 update
@@ -87,11 +88,13 @@ split
 {
 	// Complete wave
 	if (current.wave == old.wave + 1 || (current.wave == 1 && old.wave == 10)) {
+		vars.completed = true;
 		return true;
 	}
 	
-	// Enter wave
-	if (old.room == current.wave && !current.basement) {
+	// Enter wave after previous one is completed
+	if (old.room == current.wave && !current.basement && vars.completed) {
+		vars.completed = false;
 		return true;
 	}
 }
