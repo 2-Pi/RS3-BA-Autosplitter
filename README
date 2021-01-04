@@ -1,17 +1,16 @@
 LiveSplit layout, splits and autosplitter script for RuneScape 3 Barbarian Assault speedrunning.
 
 Features:
-- Starts timer when entering Wave 1
-- Splits when a wave is completed and the next wave is started
-- Resets when entering Wave 1 room (either by leaving Wave 1 or going through the door) or leaving the BA basement.
+- Works for Normal Mode and Hard Mode
+- Starts timer when entering any wave
+- Splits when a wave is completed and, if quickstart splits are on, the next wave is started
+- Resets when entering wave 1 room (either by leaving wave 1 or reentering through the door) or leaving the BA basement
 
 Setup:
-1. Download the latest version of LiveSplit (https://github.com/LiveSplit/LiveSplit/releases/download/1.8.15/LiveSplit_1.8.15.zip)
-2. Run LiveSplit.exe
-3. In LiveSplit, right-click -> Open Splits -> From File...
-4. Browse to and open 'Runescape 3 - HM BA 1-9.lss'
-5. Right-click -> Open Layout -> From File...
-6. Browse to and open 'Runescape 3 - HM BA 1-9.lsl'
-7. Right-click -> Edit Layout...
-8. Double-click Scriptable Auto Splitter
-9. Browse to and open rs3ba.asl
+1. Download rs3ba.asl
+2. Open LiveSplit
+3. In LiveSplit, right-click -> Edit Layout...
+4. Click the '+' symbol -> Control -> Scriptable Auto Splitter
+5. Double-click Scriptable Auto Splitter to open the settings
+6. Browse to and select the rs3ba.asl File
+7. Check the settings and click OK
