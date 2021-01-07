@@ -1,10 +1,10 @@
 state("rs2client")
 {
-	bool hardmode : 0x691868, 0x18, 0x38, 0x28, 0xA98, 0x50, 0x30;
 	ushort nmwave : 0x691868, 0x18, 0x38, 0x28, 0x2E80, 0x32;
 	byte hmwave : 0x691868, 0x18, 0x38, 0x28, 0xA90, 0x50, 0x30;
 	float x : 0x691868, 0x60, 0xBB0, 0x2C;
 	float y : 0x691868, 0x60, 0xBB0, 0x34;
+	int pocketID : 0x691868, 0x60, 0xCD8, 0x8, 0x120, 0x88;
 }
 
 init
@@ -12,10 +12,15 @@ init
 	vars.first_wave = false;
 	vars.wave_completed = false;
 	vars.wave_progress = 0;
+	vars.in_wave = false;
 	vars.in_basement = false;
 	vars.room = 0;
+	vars.pocketIDs = {-1, // None
+		15445, 15446, 15447, 15448, 15449, // Attacker 1-5
+		15450, 15451, 15452, 15453, 15454, // Collector 1-5
+		15455, 15456, 15457, 15458, 15459, // Defender 1-5
+		15460, 15461, 15462, 15463, 15464} // Healer 1-5
 	refreshRate = 30;
-	
 }
 
 startup
@@ -27,7 +32,7 @@ startup
 update
 {
 	// Wave progress
-	current.wave_progress = current.hardmode ? (int)current.hmwave / 0x8 : ((int)current.nmwave - 0x2000) / 0x80;
+	current.wave_progress = Math.Max((int)current.hmwave / 0x8 : ((int)current.nmwave - 0x2000) / 0x80);
 
 	// Position relative to SW tile of BA basement
 	current.x = (int)(current.x / 0x200) - 2573;
@@ -38,7 +43,6 @@ update
 	
 	// Determine room number
 	if (!current.in_basement) {
-		// Outside basement
 		current.room = 0;
 	}
 	else {
@@ -71,7 +75,6 @@ update
 	// Debug info
 	print("x: " + current.x.ToString() +
 		"\ny: " + current.y.ToString() +
-		"\nHard Mode: " + current.hardmode.ToString() + 
 		"\nWave: " + current.wave_progress.ToString() + 
 		"\nBasement: " + current.in_basement.ToString() + 
 		"\nRoom: " + current.room.ToString());
