@@ -12,14 +12,13 @@ init
 	vars.first_wave = false;
 	vars.wave_completed = false;
 	vars.wave_progress = 0;
-	vars.in_wave = false;
 	vars.in_basement = false;
-	vars.room = 0;
-	vars.pocketIDs = {-1, // None
-		15445, 15446, 15447, 15448, 15449, // Attacker 1-5
-		15450, 15451, 15452, 15453, 15454, // Collector 1-5
-		15455, 15456, 15457, 15458, 15459, // Defender 1-5
-		15460, 15461, 15462, 15463, 15464} // Healer 1-5
+	vars.pocketIDs = {
+		15445, 15446, 15447, 15448, 15449,  // Attacker 1-5
+		15450, 15451, 15452, 15453, 15454,  // Collector 1-5
+		15455, 15456, 15457, 15458, 15459,  // Defender 1-5
+		15460, 15461, 15462, 15463, 15464   // Healer 1-5
+	};
 	refreshRate = 30;
 }
 
@@ -41,37 +40,6 @@ update
 	// Check if in BA basement
 	current.in_basement = current.x >= 0 && current.x <= 41 && current.y >= 0 && current.y <= 57;
 	
-	// Determine room number
-	if (!current.in_basement) {
-		current.room = 0;
-	}
-	else {
-		int row;
-		int col;
-		if (current.y >= 44 && current.y <= 57) {
-			// Rooms 1-4
-			row = 0;
-			col = (current.x - 1) / 10 + 1;
-		}
-		else if (current.y >= 28 && current.y <= 41 && current.x != 20 && current.x != 21) {
-			// Rooms 5-8
-			row = 1;
-			col = current.x <= 19 ? current.x / 10 + 1 : (current.x - 2) / 10 + 1;
-		}
-		else if (current.y >= 12 && current.y <= 25 && current.x <= 19) {
-			// Rooms 9-10
-			row = 2;
-			col = current.x / 10 + 1;
-		}
-		else {
-			// Corridors
-			row = 0;
-			col = 0;
-		}
-
-		current.room = 4 * row + col;
-	}
-	
 	// Debug info
 	print("x: " + current.x.ToString() +
 		"\ny: " + current.y.ToString() +
@@ -83,7 +51,7 @@ update
 start
 {
 	// Enter wave
-	if (old.room == current.wave_progress && !current.in_basement) {
+	if (old.pocketID == -1 && vars.pocketIDs.Contains(current.pocketID)) {
 		vars.wave_completed = false;
 		vars.first_wave = true;
 		return true;
@@ -100,7 +68,7 @@ split
 	}
 	
 	// Enter wave after previous one is completed
-	if (settings["qs"] && old.room == current.wave_progress && !current.in_basement && vars.wave_completed) {
+	if (settings["qs"] && old.pocketID == -1 && vars.pocketIDs.Contains(current.pocketID) && vars.wave_completed) {
 		vars.wave_completed = false;
 		return true;
 	}
@@ -115,14 +83,8 @@ reset
 	}
 
 	// Fail first wave
-	if (old.room == 0 && current.room != 0 && vars.first_wave) {
+	if (vars.pocketIDs.Contains(old.pocketID) && current.pocketID == -1 && vars.first_wave == true) {
 		vars.first_wave = false;
-		return true;
-	}
-
-	// Leave basement
-	if (old.room == 0 && old.in_basement && !current.in_basement) {
-		vars.wave_completed = false;
 		return true;
 	}
 }
