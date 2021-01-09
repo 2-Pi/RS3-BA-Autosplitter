@@ -4,7 +4,7 @@ state("rs2client")
 	byte hmwave : 0x691868, 0x18, 0x38, 0x28, 0xA90, 0x50, 0x30;
 	float x : 0x691868, 0x60, 0xBB0, 0x2C;
 	float y : 0x691868, 0x60, 0xBB0, 0x34;
-	int pocketID : 0x691868, 0x60, 0xCD8, 0x8, 0x120, 0x88;
+	int pocketID : 0x691868, 0x60, 0xCD8, 0x8, 0x70, 0x88;
 }
 
 init
@@ -37,6 +37,7 @@ update
 	current.x = (int)(current.x / 0x200) - 2573;
 	current.y = (int)(current.y / 0x200) - 5251;
 
+	// Skip if nothing has changed
 	if (current.x == old.x && current.y == old.y && current.wave_progress == old.wave_progress && current.pocketID == old.pocketID) {
 		return false;
 	}
@@ -55,7 +56,7 @@ update
 start
 {
 	// Enter wave
-	if (old.pocketID == -1 && Array.IndexOf(vars.pocketIDs, current.pocketID) != -1) {
+	if ((old.pocketID == -1 || old.pocketID == 0) && Array.IndexOf(vars.pocketIDs, current.pocketID) != -1) {
 		vars.wave_completed = false;
 		vars.first_wave = true;
 		return true;
