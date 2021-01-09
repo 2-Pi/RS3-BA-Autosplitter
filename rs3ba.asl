@@ -13,7 +13,7 @@ init
 	vars.wave_completed = false;
 	vars.wave_progress = 0;
 	vars.in_basement = false;
-	vars.pocketIDs = {
+	vars.pocketIDs = new int[] {
 		15445, 15446, 15447, 15448, 15449,  // Attacker 1-5
 		15450, 15451, 15452, 15453, 15454,  // Collector 1-5
 		15455, 15456, 15457, 15458, 15459,  // Defender 1-5
@@ -31,11 +31,15 @@ startup
 update
 {
 	// Wave progress
-	current.wave_progress = Math.Max((int)current.hmwave / 0x8 : ((int)current.nmwave - 0x2000) / 0x80);
+	current.wave_progress = Math.Max((int)current.hmwave / 0x8, ((int)current.nmwave - 0x2000) / 0x80);
 
 	// Position relative to SW tile of BA basement
 	current.x = (int)(current.x / 0x200) - 2573;
 	current.y = (int)(current.y / 0x200) - 5251;
+
+	if (current.x == old.x && current.y == old.y && current.wave_progress == old.wave_progress && current.pocketID == old.pocketID) {
+		return false;
+	}
 	
 	// Check if in BA basement
 	current.in_basement = current.x >= 0 && current.x <= 41 && current.y >= 0 && current.y <= 57;
@@ -44,14 +48,14 @@ update
 	print("x: " + current.x.ToString() +
 		"\ny: " + current.y.ToString() +
 		"\nWave: " + current.wave_progress.ToString() + 
-		"\nBasement: " + current.in_basement.ToString() + 
-		"\nRoom: " + current.room.ToString());
+		"\nBasement: " + current.in_basement.ToString() +
+		"\nPocket Slot: " + current.pocketID.ToString());
 }
 
 start
 {
 	// Enter wave
-	if (old.pocketID == -1 && vars.pocketIDs.Contains(current.pocketID)) {
+	if (old.pocketID == -1 && Array.IndexOf(vars.pocketIDs, current.pocketID) != -1) {
 		vars.wave_completed = false;
 		vars.first_wave = true;
 		return true;
@@ -68,7 +72,7 @@ split
 	}
 	
 	// Enter wave after previous one is completed
-	if (settings["qs"] && old.pocketID == -1 && vars.pocketIDs.Contains(current.pocketID) && vars.wave_completed) {
+	if (settings["qs"] && old.pocketID == -1 && Array.IndexOf(vars.pocketIDs, current.pocketID) != -1 && vars.wave_completed) {
 		vars.wave_completed = false;
 		return true;
 	}
@@ -83,7 +87,7 @@ reset
 	}
 
 	// Fail first wave
-	if (vars.pocketIDs.Contains(old.pocketID) && current.pocketID == -1 && vars.first_wave == true) {
+	if (Array.IndexOf(vars.pocketIDs, old.pocketID) != -1 && current.pocketID == -1 && vars.first_wave == true) {
 		vars.first_wave = false;
 		return true;
 	}
